@@ -1,0 +1,29 @@
+Каждая строка - параметры объекта, последовательно:
+1 - подтип PlaceableInCell(Player - 1, Enemy - 2, Item - 3), если не Player, то:
+2 - подтип подтипа PlaceableInCell (подтипы Item, Enemy)
+2 (для Player) или 3 (для Item, Enemy) - специфические параметры классов (id, pos, attack, ...)
+
+Enemy: [
+	1: DamageableEnemy
+	2: LimitedLifeEnemy
+	3: ImmortalEnemy
+]
+Item: [
+	1: SanityAffectItem
+	2: DamageToEnemiesItem
+	3: KeyItem
+]
+
+MoveStrategy [
+	1: MoveStrategyStandart
+	2: MoveStrategyChase
+	3: MoveStrategyConfusion
+]
+
+Например:
+1) Player curr_pos_.x curr_pos_.y sanity_ damage_to_enemy_
+1 0 3 100 0
+2) Enemy ImmortalEnemy id_ curr_pos_.x curr_pos_.y attack_ curr_strategy_
+2 3 1 5 5 5 2
+3) Item SanityAffectItem id_ curr_pos_.x curr_pos_.y sanity_heal_
+3 1 2 3 4 10

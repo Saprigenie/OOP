@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/Img">
+        <file>Data/Img/Floor/1_exit.jpg</file>
+        <file>Data/Img/Floor/1_floor.jpg</file>
+        <file>Data/Img/Objects/0_obj.png</file>
+        <file>Data/Img/Objects/1_obj.png</file>
+        <file>Data/Img/Objects/4_obj.png</file>
+        <file>Data/Img/Objects/2_obj.png</file>
+        <file>Data/Img/Objects/3_obj.png</file>
+        <file>Data/Img/Floor/1_entrance.jpg</file>
+    </qresource>
+    <qresource prefix="/Rooms">
+        <file>Data/Rooms/1_room.txt</file>
+    </qresource>
+    <qresource prefix="/RoomObjects">
+        <file>Data/RoomObjects/1_objects.txt</file>
+    </qresource>
+</RCC>

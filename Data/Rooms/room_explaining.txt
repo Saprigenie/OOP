@@ -1,0 +1,10 @@
+room_width_ room_height_
+exits_count_
+CellType(0, 0) CellType(1, 0) ... CellType(room_width_ - 1, 0)
+...
+CellType(0, room_height_ - 1) ... CellType(room_width_ - 1, room_height_ - 1) 
+room_type_exit_0
+room_type_exit_1
+room_type_exit_2
+...
+room_type_exit_(exits_count_-1)
