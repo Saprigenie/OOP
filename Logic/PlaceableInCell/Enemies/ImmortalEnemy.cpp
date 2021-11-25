@@ -1,10 +1,8 @@
 #include "ImmortalEnemy.h"
 
 ImmortalEnemy::ImmortalEnemy(int id, Pos pos, int attack, MoveStrategy* new_strategy):
-Enemy(id, pos, attack, new_strategy) {
-    life_ = 1;
-}
+Enemy(id, pos, 1, attack, new_strategy) {}
 
-void getDamaged(int damage = 0) {}
+void ImmortalEnemy::getDamaged(int damage) {}
 
 

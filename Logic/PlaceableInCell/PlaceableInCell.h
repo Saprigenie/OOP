@@ -10,20 +10,23 @@
 class PlaceableInCell {
 protected:
     int id_;
+    int life_;
     Pos curr_pos_;
 public:
-    PlaceableInCell(int id, Pos curr_pos);
+    PlaceableInCell(int id, Pos curr_pos, int life);
 
     Pos getPos();
     void setPos(Pos new_pos);
     int getId();
+    int getLife();
 
     virtual Interactions Interact(PlaceableInCell* to) = 0;
     virtual Interactions Interact(Player& to) = 0;
     virtual Interactions Interact(Enemy& to) = 0;
     virtual Interactions Interact(Item& to) = 0;
+    virtual Interactions Interact(Furniture& to);
 
-    virtual void Move(Pos new_pos = Pos{-1, -1}) = 0;
+    virtual void Move(Pos new_pos = Pos{-1, -1});
 };
 
 #endif // PLACEABLEINCELL_H

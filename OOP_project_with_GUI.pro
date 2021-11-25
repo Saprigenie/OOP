@@ -2,7 +2,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
+CONFIG += c++20
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -24,13 +24,13 @@ SOURCES += \
     Logic/Cell/CellTypes/PathlessCell.cpp \
     Logic/Controller/Controller.cpp \
     Logic/GameLogic.cpp \
-    Logic/PlaceableInCell/Enemies/DamageableEnemy.cpp \
     Logic/PlaceableInCell/Enemies/Enemy.cpp \
     Logic/PlaceableInCell/Enemies/ImmortalEnemy.cpp \
     Logic/PlaceableInCell/Enemies/LimitedLifeEnemy.cpp \
     Logic/PlaceableInCell/Enemies/MoveStrategies/MoveStrategyChase.cpp \
     Logic/PlaceableInCell/Enemies/MoveStrategies/MoveStrategyConfusion.cpp \
     Logic/PlaceableInCell/Enemies/MoveStrategies/MoveStrategyStandart.cpp \
+    Logic/PlaceableInCell/Furniture/Furniture.cpp \
     Logic/PlaceableInCell/Items/DamageToEnemiesItem.cpp \
     Logic/PlaceableInCell/Items/Item.cpp \
     Logic/PlaceableInCell/Items/KeyItem.cpp \
@@ -38,9 +38,14 @@ SOURCES += \
     Logic/PlaceableInCell/PlaceableInCell.cpp \
     Logic/PlaceableInCell/Player/Player.cpp \
     Logic/Room/Room.cpp \
+    Logic/Rule/RulesList.cpp \
     main.cpp
 
 HEADERS += \
+    Game/ControllerObserver/ControllerObserver.h \
+    Game/Game.h \
+    Game/RoomChangeNotify/RoomChangeObserver.h \
+    Game/RoomState.h \
     Gui/DrawObject/DrawableObject.h \
     Gui/GameView.h \
     Gui/View/Observable.h \
@@ -59,7 +64,6 @@ HEADERS += \
     Logic/Cell/CellTypes/PathlessCell.h \
     Logic/Controller/Controller.h \
     Logic/GameLogic.h \
-    Logic/PlaceableInCell/Enemies/DamageableEnemy.h \
     Logic/PlaceableInCell/Enemies/Enemy.h \
     Logic/PlaceableInCell/Enemies/ImmortalEnemy.h \
     Logic/PlaceableInCell/Enemies/LimitedLifeEnemy.h \
@@ -68,6 +72,7 @@ HEADERS += \
     Logic/PlaceableInCell/Enemies/MoveStrategies/MoveStrategyConfusion.h \
     Logic/PlaceableInCell/Enemies/MoveStrategies/MoveStrategyStandart.h \
     Logic/PlaceableInCell/Enemies/MoveStrategies/StrategiesEnum.h \
+    Logic/PlaceableInCell/Furniture/Furniture.h \
     Logic/PlaceableInCell/InteractionEnum.h \
     Logic/PlaceableInCell/Items/DamageToEnemiesItem.h \
     Logic/PlaceableInCell/Items/Item.h \
@@ -77,7 +82,13 @@ HEADERS += \
     Logic/PlaceableInCell/PlaceablesDeclaration.h \
     Logic/PlaceableInCell/Player/Player.h \
     Logic/Room/Pos.h \
-    Logic/Room/Room.h
+    Logic/Room/Room.h \
+    Logic/Rule/DestroyObjectRule.h \
+    Logic/Rule/DestroyedObjectNumRule.h \
+    Logic/Rule/KeyItemRule.h \
+    Logic/Rule/Rule.h \
+    Logic/Rule/RulesList.h \
+    Logic/Rule/TemplateRule.h
 
 FORMS += \
     Gui/GameView.ui

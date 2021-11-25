@@ -11,6 +11,7 @@ public:
 
     void NotifyRoomChange();
     void NotifyRoomObjectsChange();
+    void NotifyStaticObjectsChange();
     void NotifyObjectDestroy(int i);
     void NotifyTurnComplete();
     void NotifyWin();

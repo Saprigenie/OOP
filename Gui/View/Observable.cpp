@@ -12,6 +12,10 @@ void Observable::NotifyRoomObjectsChange() {
     curr_obs_->UpdateRoomObjectsChange();
 }
 
+void Observable::NotifyStaticObjectsChange() {
+    curr_obs_->UpdateStaticObjectsChange();
+}
+
 void Observable::NotifyObjectDestroy(int i) {
     curr_obs_->UpdateObjectDestroy(i);
 }

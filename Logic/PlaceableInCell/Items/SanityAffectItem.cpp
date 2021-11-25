@@ -7,6 +7,6 @@ Item(id, curr_pos) {
 
 Interactions SanityAffectItem::Interact(Player& to) {
     to.Heal_sanity(sanity_heal_);
-    to.Move(this->getPos());
+    life_ = 0;
     return Item::Interact(to);
 }

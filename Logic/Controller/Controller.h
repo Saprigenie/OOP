@@ -3,17 +3,17 @@
 
 #include <QObject>
 
-#include "../GameLogic.h"
+#include "../../Game/ControllerObserver/ControllerObserver.h"
 #include "../../Gui/GameView.h"
 
 class Controller: public QObject {
 private:
     Q_OBJECT
-    GameLogic* curr_logic_;
+    ControllerObserver* obs_;
 public:
-    Controller(GameLogic* logic_, GameView* view);
+    Controller(ControllerObserver* logic_, GameView* view);
 public slots:
-    void PlayerChangePos(Pos player_pos_change);
+    void MoveArrowPushed(Pos player_pos_change);
 };
 
 #endif // CONTROLLER_H

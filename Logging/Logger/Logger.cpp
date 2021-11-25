@@ -1,9 +1,9 @@
 #include "Logger.h"
 
 Logger* Logger::logger_inst = nullptr;
+std::string Logger::log_path_ = "log.txt";
 
 Logger::Logger() {
-    log_path_ = "log.txt";
     file_stream_.open(log_path_);
     if (!file_stream_.is_open()) {
         std::string error_msg = "Can't open file with path: " + log_path_;
@@ -21,9 +21,9 @@ Logger& Logger::getInstance() {
 }
 
 void Logger::setLogPath(std::string new_path) {
-    file_stream_.close();
-    log_path_ = new_path;
-    file_stream_.open(log_path_);
+    if (logger_inst == nullptr) {
+        log_path_ = new_path;
+    }
 }
 
 Logger& Logger::operator << (LogFile& log_info) {

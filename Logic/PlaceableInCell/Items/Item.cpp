@@ -1,6 +1,6 @@
 #include "Item.h"
 
-Item::Item(int id, Pos curr_pos): PlaceableInCell(id, curr_pos) {}
+Item::Item(int id, Pos curr_pos): PlaceableInCell(id, curr_pos, 1) {}
 
 Interactions Item::Interact(PlaceableInCell* to) {
     auto res = to->Interact(*this);
@@ -17,7 +17,8 @@ Interactions Item::Interact(Item& to) {
 }
 
 Interactions Item::Interact(Player& to) {
+    Pos last_pos = this->getPos();
+    curr_pos_ = to.getPos();
+    to.Move(last_pos);
     return kP_interact_I;
 }
-
-void Item::Move(Pos new_pos) {};

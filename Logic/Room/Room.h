@@ -20,13 +20,13 @@ private:
     int room_width_;
     int room_height_;
 
-    Pos* exits_pos_;
-    int exits_count_;
+    Pos* entrances_pos_;
+    int entrance_count_;
 
     void ClearRoomCells();
     void CopyRoom(const Room& from);
     void MoveRoom(Room&& from);
-    void CreateCells(int* items_to_exits);
+    void CreateCells(int* next_rooms_ind);
     void ExitsCheck();
 
 public:
@@ -42,6 +42,8 @@ public:
     int getHeight();
     Cell& getRoomCell(int x, int y);
     Cell& getRoomCell(Pos cell_pos);
+    Pos* getEntrancesPos();
+    Pos getEntrancePosByRoomId(int id);
 
     ~Room();
 };

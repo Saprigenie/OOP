@@ -7,7 +7,7 @@
 
 class LimitedLifeEnemy: public Enemy {
 public:
-    LimitedLifeEnemy(int id, Pos pos, int attack, int life, MoveStrategy* new_strategy);
+    LimitedLifeEnemy(int id, Pos pos, int life, int attack, MoveStrategy* new_strategy);
 
     void Move(Pos new_pos = Pos{-1, -1});
 };

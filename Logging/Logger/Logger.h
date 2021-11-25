@@ -16,7 +16,7 @@ class Logger {
 private:
     static Logger* logger_inst;
     std::ofstream file_stream_;
-    std::string log_path_;
+    static std::string log_path_;
 
     long long int log_count_;
 
@@ -27,7 +27,7 @@ public:
     Logger(const Logger& from) = delete;
     Logger& operator =(const Logger& from) = delete;
 
-    void setLogPath(std::string new_path);
+    static void setLogPath(std::string new_path);
 
     Logger& operator << (LogFile& log_info);
     Logger& operator << (LogConsole& log_info);

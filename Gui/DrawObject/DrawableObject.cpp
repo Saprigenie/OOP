@@ -1,21 +1,20 @@
 #include "DrawableObject.h"
 
-DrawableObject::DrawableObject(QGraphicsScene* scene, int id, Pos pos, int width_cell, int top_padding_scene) {
+DrawableObject::DrawableObject(QGraphicsScene* scene, int id, Pos pos, int width_cell, int top_padding_scene,
+                               int height, int width) {
     id_ = id;
     curr_pos_ = pos;
+    height_ = height;
+    width_ = height;
     width_cell_ = width_cell;
     top_padding_scene_ = top_padding_scene;
-    obj_picture.load(QStringLiteral(":/Img/Data/Img/Objects/%1_obj.png").arg(id_));
+    obj_picture_.load(QStringLiteral(":/Img/Data/Img/Objects/%1_obj.png").arg(id_));
 
-    double height_fact = ((double)obj_picture.height())/obj_picture.width();
-    obj_picture = obj_picture.scaled(width_cell_, width_cell_*height_fact);
-    this->setPos(curr_pos_.x * width_cell_, top_padding_scene_ + curr_pos_.y * width_cell_ + width_cell_ - height_fact* width_cell_);
+    double height_fact = ((double)obj_picture_.height())/obj_picture_.width();
+    obj_picture_ = obj_picture_.scaled(width_cell_*width_, width_cell_*width_*height_fact);
+    this->setPos(curr_pos_.x * width_cell_, top_padding_scene_ + curr_pos_.y * width_cell_ + width_cell_ - height_fact * width_ * width_cell_);
     this->setZValue(curr_pos_.y);
     scene->addItem(this);
-}
-
-void DrawableObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
-    painter->drawPixmap(0,0, obj_picture);
 }
 
 Pos DrawableObject::getRoomPos() {
@@ -39,17 +38,21 @@ void DrawableObject::setScenePos(QPointF new_pos) {
 }
 
 QPointF DrawableObject::RoomPosToScenePos(Pos new_pos) {
-    return QPoint{new_pos.x * width_cell_, top_padding_scene_ + new_pos.y*width_cell_ + width_cell_ - obj_picture.height()};
+    return QPoint{new_pos.x * width_cell_, top_padding_scene_ + new_pos.y*width_cell_ + width_cell_ - obj_picture_.height()};
 }
 
 Pos DrawableObject::ScenePosToRoomPos(QPointF new_pos) {
-    return Pos{int(new_pos.x())/width_cell_, (-top_padding_scene_ + int(new_pos.y()) - width_cell_ + obj_picture.height())/width_cell_};
-}
-
-QRectF DrawableObject::boundingRect() const {
-    return QRectF(0, 0, obj_picture.width(), obj_picture.height());
+    return Pos{int(new_pos.x())/width_cell_, (-top_padding_scene_ + int(new_pos.y()) - width_cell_ + obj_picture_.height())/width_cell_};
 }
 
 QPixmap DrawableObject::getPixmap() {
-    return obj_picture;
+    return obj_picture_;
+}
+
+QRectF DrawableObject::boundingRect() const {
+    return QRectF(0, 0, obj_picture_.width(), obj_picture_.height());
+}
+
+void DrawableObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
+    painter->drawPixmap(0,0, obj_picture_);
 }

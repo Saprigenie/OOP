@@ -64,25 +64,38 @@ void GameView::UpdateRoomChange() {
             } else {
                 chosen_img = floor_img;
             }
-            QGraphicsPixmapItem* floor_item = room_scene->addPixmap(chosen_img);
-            floor_item->setPos(x*floor_cell_size_, y*floor_cell_size_ + top_padding_scene_);
+            if (typeid(curr_room.getRoomCell(x, y)) != typeid(PathlessCell)) {
+                QGraphicsPixmapItem* floor_item = room_scene->addPixmap(chosen_img);
+                floor_item->setPos(x*floor_cell_size_, y*floor_cell_size_ + top_padding_scene_);
+            }
         }
     }
 }
 
 void GameView::UpdateRoomObjectsChange() {
-    ClearObjects();
-    auto room_obj = curr_logic_->getRoomObjects();
+    ClearMoveObjects();
+    auto room_obj = curr_logic_->getRoomMoveObjects();
     for (int i=0; i < room_obj.size(); i++) {
-        draw_objects_.push_back(new DrawableObject(room_scene, room_obj[i]->getId(), room_obj[i]->getPos(), floor_cell_size_, top_padding_scene_));
+        draw_move_objects_.push_back(new DrawableObject(room_scene, room_obj[i]->getId(),
+                                     room_obj[i]->getPos(), floor_cell_size_, top_padding_scene_));
     }
     CenterViewOnPlayerPos();
 }
 
+void GameView::UpdateStaticObjectsChange() {
+    ClearStaticObjects();
+    auto room_obj = curr_logic_->getRoomStaticObjects();
+    for (int i=0; i < room_obj.size(); i++) {
+        draw_static_objects_.push_back(new DrawableObject(room_scene, room_obj[i]->getId(),
+                                       room_obj[i]->getPos(), floor_cell_size_, top_padding_scene_,
+                                       room_obj[i]->getWidth(), room_obj[i]->getHeight()));
+    }
+}
+
 void GameView::UpdateObjectDestroy(int i) {
-    room_scene->removeItem(draw_objects_[i]);
-    delete draw_objects_[i];
-    draw_objects_.erase(draw_objects_.begin() + i);
+    room_scene->removeItem(draw_move_objects_[i]);
+    delete draw_move_objects_[i];
+    draw_move_objects_.erase(draw_move_objects_.begin() + i);
 }
 
 void GameView::UpdateTurnComplete() {
@@ -90,21 +103,12 @@ void GameView::UpdateTurnComplete() {
     int width_room = curr_room.getWidth();
     int height_room = curr_room.getHeight();
 
-    for (int x = 0; x < width_room; x++) {
-        for (int y = 0; y < height_room; y++) {
-            if (curr_room.getRoomCell(x, y).getObject()) {
-                int i = std::find_if(curr_logic_->getRoomObjects().begin(), curr_logic_->getRoomObjects().end(),
-                [x, y](PlaceableInCell* curr_obj) {
-                    return curr_obj->getPos().x == x && curr_obj->getPos().y == y;
-                }) - curr_logic_->getRoomObjects().begin();
+    for (int i=0; i < draw_move_objects_.size(); i++) {
+        QPropertyAnimation* anim = new QPropertyAnimation(draw_move_objects_[i], "getScenePos");
 
-                QPropertyAnimation* anim = new QPropertyAnimation(draw_objects_[i], "getScenePos");
-
-                anim->setDuration(200);
-                anim->setEndValue(draw_objects_[i]->RoomPosToScenePos(curr_logic_->getRoomObjects()[i]->getPos()));
-                anim->start(QAbstractAnimation::DeleteWhenStopped);
-            }
-        }
+        anim->setDuration(200);
+        anim->setEndValue(draw_move_objects_[i]->RoomPosToScenePos(curr_logic_->getRoomMoveObjects()[i]->getPos()));
+        anim->start(QAbstractAnimation::DeleteWhenStopped);
     }
     CenterViewOnPlayerPos();
     TestShowPlayerConditions();
@@ -123,7 +127,7 @@ void GameView::UpdateDefeat() {
 void GameView::TestShowPlayerConditions() {
     QString info = QStringLiteral("Player: "\
     "Sanity: %1\nDamage_to_enemies: %2\nNum_key_items: %3\n\n").arg(Player::getInstance().getSanity()
-    ).arg(Player::getInstance().damage_to_enemy_).arg(Player::getInstance().getNumItems());
+    ).arg(Player::getInstance().getDamageToEnemies()).arg(Player::getInstance().getNumItems());
 
     test_info->setText(info);
 }
@@ -133,22 +137,32 @@ void GameView::CenterViewOnPlayerPos() {
     ui->room_view->centerOn(floor_cell_size_* player_pos.x, floor_cell_size_* player_pos.y + floor_cell_size_);
 }
 
-void GameView::DeleteRoom() {
-    ClearObjects();
-    room_scene->clear();
-}
-
-void GameView::ClearObjects() {
-    for (int i=0; i < draw_objects_.size(); i++) {
-        room_scene->removeItem(draw_objects_[i]);
-        delete draw_objects_[i];
-    }
-
-    draw_objects_.clear();
-}
-
 GameView::~GameView() {
     DeleteRoom();
     delete room_scene;
     delete ui;
+}
+
+void GameView::DeleteRoom() {
+    ClearMoveObjects();
+    ClearStaticObjects();
+    room_scene->clear();
+}
+
+void GameView::ClearMoveObjects() {
+    for (int i=0; i < draw_move_objects_.size(); i++) {
+        room_scene->removeItem(draw_move_objects_[i]);
+        delete draw_move_objects_[i];
+    }
+
+    draw_move_objects_.clear();
+}
+
+void GameView::ClearStaticObjects() {
+    for (int i=0; i < draw_static_objects_.size(); i++) {
+        room_scene->removeItem(draw_static_objects_[i]);
+        delete draw_static_objects_[i];
+    }
+
+    draw_static_objects_.clear();
 }

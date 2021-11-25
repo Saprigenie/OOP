@@ -1,22 +1,20 @@
 #include <QApplication>
 
-#include "Gui/GameView.h"
-#include "Logic/Room/Room.h"
-#include "Logic/Room/Pos.h"
-#include "Logic/GameLogic.h"
-#include "Logic/Controller/Controller.h"
+#include "Game/Game.h"
+#include "Logic/Rule/DestroyedObjectNumRule.h"
+#include "Logic/Rule/DestroyObjectRule.h"
+#include "Logic/Rule/KeyItemRule.h"
+#include "Logic/Rule/RulesList.h"
 
-int main(int argc, char *argv[])
-{
+static RulesList all_rules = RulesList();
+
+int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
-
-    GameLogic logic;
-    logic.LogActive();
-    GameView game_view(&logic);
-    //game_view.LogActive();
-    logic.CreateRoom();
-    Controller control(&logic, &game_view);
-    game_view.show();
-
+    Game<all_rules> game;
+    all_rules.AddRule(new DestroyedObjectNumRule<2, 1, 2>());
+    all_rules.AddRule(new KeyItemRule<1, 2, 4>());
+    all_rules.AddRule(new KeyItemRule<1, 6, 4>());
+    all_rules.AddRule(new DestroyObjectRule<3, 1, 1>());
+    game.Start();
     return a.exec();
 }

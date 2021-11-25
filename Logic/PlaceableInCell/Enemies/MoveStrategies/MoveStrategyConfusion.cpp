@@ -1,7 +1,8 @@
 #include "MoveStrategyConfusion.h"
 
 Pos MoveStrategyConfusion::Move(Pos curr_pos) {
-    srand(time(NULL));
+    std::this_thread::sleep_for(std::chrono::milliseconds(2));
+    srand(clock());
     int choise = rand() % 5;
     Pos new_pos;
     new_pos.x = Player::getInstance().getPos().x;

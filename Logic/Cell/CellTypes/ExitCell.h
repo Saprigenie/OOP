@@ -4,11 +4,8 @@
 #include "../Cell.h"
 
 class ExitCell: public Cell  {
-    int item_id_to_process_;
 public:
-    ExitCell(Pos cell_pos, int item_id_to_process = -1, PlaceableInCell* object_in_cell = nullptr);
-
-    bool PlayerInteract(Player& to);
+    ExitCell(Pos cell_pos, PlaceableInCell* object_in_cell = nullptr);
 };
 
 #endif // EXITCELL_H

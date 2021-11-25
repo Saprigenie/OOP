@@ -13,14 +13,13 @@
 class Enemy: public PlaceableInCell {
 protected:
     int attack_;
-    int life_;
 
     MoveStrategy* curr_strategy_ = nullptr;
 
 public:
-    Enemy(int id, Pos pos, int attack, MoveStrategy* new_strategy);
+    Enemy(int id, Pos pos, int life, int attack, MoveStrategy* new_strategy);
 
-    void getDamaged(int damage = 0);
+    virtual void getDamaged(int damage = 0);
 
     Interactions Interact(PlaceableInCell* to);
     Interactions Interact(Enemy& to);
@@ -28,7 +27,7 @@ public:
     Interactions Interact(Item& to);
 
     void setMoveStrategy(MoveStrategy* new_strategy);
-    void Move(Pos new_pos = Pos{-1, -1});
+    void Move(Pos new_pos = Pos{-1, -1}) override;
 
     ~Enemy();
 };

@@ -15,15 +15,15 @@ private:
     Q_OBJECT
     Q_PROPERTY(QPointF getScenePos READ getScenePos WRITE setScenePos)
     int id_;
+    Pos curr_pos_;
     int width_cell_;
     int top_padding_scene_;
-    Pos curr_pos_;
-    QPixmap obj_picture;
-
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    int height_;
+    int width_;
+    QPixmap obj_picture_;
 public:
-    DrawableObject(QGraphicsScene* scene, int id, Pos pos, int width_cell, int top_padding_scene);
+    DrawableObject(QGraphicsScene* scene, int id, Pos pos, int width_cell, int top_padding_scene,
+                   int height = 1, int width = 1);
 
     Pos getRoomPos();
     void setRoomPos(Pos new_pos);
@@ -32,6 +32,9 @@ public:
     QPointF RoomPosToScenePos(Pos new_pos);
     Pos ScenePosToRoomPos(QPointF new_pos);
     QPixmap getPixmap();
+private:
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };
 
 #endif // DRAWABLEOBJECT_H

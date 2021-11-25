@@ -8,11 +8,34 @@
         <file>Data/Img/Objects/2_obj.png</file>
         <file>Data/Img/Objects/3_obj.png</file>
         <file>Data/Img/Floor/1_entrance.jpg</file>
+        <file>Data/Img/Floor/2_entrance.jpg</file>
+        <file>Data/Img/Floor/2_exit.jpg</file>
+        <file>Data/Img/Floor/2_floor.jpg</file>
+        <file>Data/Img/Floor/3_entrance.jpg</file>
+        <file>Data/Img/Floor/3_exit.jpg</file>
+        <file>Data/Img/Floor/3_floor.jpg</file>
+        <file>Data/Img/Floor/4_floor.jpg</file>
+        <file>Data/Img/Floor/5_floor.jpg</file>
+        <file>Data/Img/Floor/6_floor.jpg</file>
+        <file>Data/Img/Objects/5_obj.png</file>
+        <file>Data/Img/Objects/6_obj.png</file>
+        <file>Data/Img/Objects/7_obj.png</file>
+        <file>Data/Img/Objects/8_obj.png</file>
     </qresource>
     <qresource prefix="/Rooms">
         <file>Data/Rooms/1_room.txt</file>
+        <file>Data/Rooms/2_room.txt</file>
+        <file>Data/Rooms/3_room.txt</file>
+        <file>Data/Rooms/4_room.txt</file>
+        <file>Data/Rooms/5_room.txt</file>
+        <file>Data/Rooms/6_room.txt</file>
     </qresource>
     <qresource prefix="/RoomObjects">
         <file>Data/RoomObjects/1_objects.txt</file>
+        <file>Data/RoomObjects/2_objects.txt</file>
+        <file>Data/RoomObjects/3_objects.txt</file>
+        <file>Data/RoomObjects/4_objects.txt</file>
+        <file>Data/RoomObjects/5_objects.txt</file>
+        <file>Data/RoomObjects/6_objects.txt</file>
     </qresource>
 </RCC>

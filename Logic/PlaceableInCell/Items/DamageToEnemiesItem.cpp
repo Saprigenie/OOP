@@ -6,7 +6,7 @@ Item(id, curr_pos) {
 }
 
 Interactions DamageToEnemiesItem::Interact(Player& to) {
-    to.damage_to_enemy_ += damage_to_enemies_;
-    to.Move(this->getPos());
+    to.setDamageToEnemies(to.getDamageToEnemies() + damage_to_enemies_);
+    life_ = 0;
     return Item::Interact(to);
 }

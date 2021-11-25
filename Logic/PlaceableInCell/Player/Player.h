@@ -10,13 +10,12 @@
 
 class Player: public PlaceableInCell {
 private:
-    int sanity_;
+    int damage_to_enemy_;
     std::vector<int> player_items_;
     static Player* hero_obj;
 
     Player();
 public:
-    int damage_to_enemy_;
 
     static Player& getInstance();
     Player(const Player& from) = delete;
@@ -24,6 +23,8 @@ public:
 
     void setSanity(int sanity);
     int getSanity();
+    void setDamageToEnemies(int new_damage);
+    int getDamageToEnemies();
     int getNumItems();
     void Damage_sanity(int damage);
     void Heal_sanity(int heal);
@@ -32,7 +33,7 @@ public:
     void removeItem(int id);
     bool HasItem(int id);
 
-    void Move(Pos new_pos = Pos{-1, -1});
+    void Move(Pos new_pos = Pos{-1, -1}) override;
 
     Interactions Interact(PlaceableInCell* to);
     Interactions Interact(Enemy& to);

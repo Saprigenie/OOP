@@ -10,7 +10,7 @@
 #include "../Log/LogConsole.h"
 
 class Loggable {
-    bool logging_active_ = false;
+    bool logging_active_ = true;
 public:
     void LogActive();
     void LogDisable();

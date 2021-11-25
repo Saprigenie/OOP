@@ -1,9 +1,8 @@
 #include "Player.h"
 
 Player::Player():
-PlaceableInCell(0, Pos{0, 0}) {
-    sanity_ = 100;
-    damage_to_enemy_ = 0;
+PlaceableInCell(0, Pos{0, 0}, 100) {
+    damage_to_enemy_ = 1;
 }
 
 Player* Player::hero_obj = nullptr;
@@ -16,11 +15,19 @@ Player& Player::getInstance() {
 }
 
 void Player::setSanity(int sanity) {
-    sanity_ = sanity;
+    life_ = sanity;
 }
 
 int Player::getSanity() {
-    return sanity_;
+    return life_;
+}
+
+void Player::setDamageToEnemies(int new_damage) {
+    damage_to_enemy_ = new_damage;
+}
+
+int Player::getDamageToEnemies() {
+    return damage_to_enemy_;
 }
 
 int Player::getNumItems() {
@@ -28,13 +35,13 @@ int Player::getNumItems() {
 }
 
 void Player::Damage_sanity(int damage) {
-    sanity_ -= damage;
+    life_ -= damage;
 }
 
 void Player::Heal_sanity(int heal) {
-    sanity_ += heal;
-    if (sanity_ > 100)
-        sanity_ = 100;
+    life_ += heal;
+    if (life_ > 100)
+        life_ = 100;
 }
 
 void Player::appendItem(int new_item) {

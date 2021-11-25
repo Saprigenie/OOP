@@ -18,9 +18,9 @@ public:
     void setObject(PlaceableInCell* new_object);
     PlaceableInCell* getObject();
 
-    virtual bool PlayerInteract(Player& to) = 0;
+    virtual int GetRoomId();
 
-    ~Cell();
+    virtual void Interact(Player& to);
 };
 
 #endif // CELL_H

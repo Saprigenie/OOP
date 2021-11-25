@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
-Enemy::Enemy(int id, Pos pos, int attack, MoveStrategy* new_strategy):
-PlaceableInCell(id, pos) {
+Enemy::Enemy(int id, Pos pos, int life, int attack, MoveStrategy* new_strategy):
+PlaceableInCell(id, pos, life) {
     attack_ = attack;
     curr_strategy_ = new_strategy;
 }
@@ -21,7 +21,7 @@ Interactions Enemy::Interact(Enemy& to) {
 
 Interactions Enemy::Interact(Player& to) {
     to.Damage_sanity(attack_);
-    getDamaged(to.damage_to_enemy_);
+    getDamaged(to.getDamageToEnemies());
     return kP_interact_E;
 }
 

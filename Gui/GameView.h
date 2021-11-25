@@ -28,7 +28,8 @@ private:
     Ui::GameView *ui;
     QGraphicsScene* room_scene;
     GameLogic* curr_logic_;
-    std::vector<DrawableObject*> draw_objects_;
+    std::vector<DrawableObject*> draw_move_objects_;
+    std::vector<DrawableObject*> draw_static_objects_;
 
     int floor_cell_size_ = 500;
     int top_padding_scene_ = 500;
@@ -42,6 +43,7 @@ public:
 
     void UpdateRoomChange();
     void UpdateRoomObjectsChange();
+    void UpdateStaticObjectsChange();
     void UpdateObjectDestroy(int i);
     void UpdateTurnComplete();
     void UpdateWin();
@@ -50,12 +52,13 @@ public:
     void TestShowPlayerConditions();
     void CenterViewOnPlayerPos();
 
-    void ClearObjects();
-    void DeleteRoom();
-
     ~GameView();
 signals:
     void PlayerPressMove(Pos);
+private:
+    void ClearMoveObjects();
+    void ClearStaticObjects();
+    void DeleteRoom();
 };
 
 #endif // GAMEVIEW_H

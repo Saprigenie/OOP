@@ -14,8 +14,6 @@ public:
     Interactions Interact(Enemy& to);
     virtual Interactions Interact(Player& to);
     Interactions Interact(Item& to);
-
-    void Move(Pos new_pos = Pos{-1, -1});
 };
 
 #endif // ITEM_H

@@ -4,6 +4,7 @@
 class Player;
 class Enemy;
 class Item;
+class Furniture;
 
 
 #endif // PLACEABLESDECLARATION_H

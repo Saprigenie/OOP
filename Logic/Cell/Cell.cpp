@@ -22,7 +22,12 @@ PlaceableInCell* Cell::getObject() {
     return object_in_cell_;
 }
 
-Cell::~Cell() {
-    if (object_in_cell_)
-        delete object_in_cell_;
+int Cell::GetRoomId() {
+    return -1;
 }
+
+void Cell::Interact(Player& to) {
+    to.setPos(cell_pos_);
+}
+
+void Interact(PlaceableInCell& to) {}
